@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   devServer: {
@@ -18,6 +19,7 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
   },
+  plugins: [new webpack.EnvironmentPlugin(["API_ENV"])],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },

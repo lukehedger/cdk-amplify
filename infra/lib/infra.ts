@@ -16,6 +16,9 @@ export class InfraStack extends Stack {
       appName: amplifyAppName,
       autoBranchCreation: {
         autoBuild: true,
+        environmentVariables: {
+          API_ENV: "sandbox",
+        },
         pullRequestPreview: true,
       },
       buildSpec: BuildSpec.fromObject({
@@ -38,6 +41,9 @@ export class InfraStack extends Stack {
           },
         },
       }),
+      environmentVariables: {
+        API_ENV: "production",
+      },
       sourceCodeProvider: new GitHubSourceCodeProvider({
         oauthToken: SecretValue.secretsManager("dev/Tread/GitHubToken"),
         owner: "lukehedger",
