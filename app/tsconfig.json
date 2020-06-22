@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
-    "declaration": true,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "module": "commonjs",
+    "jsx": "react",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "target": "ES2018",
-    "typeRoots": ["./node_modules/@types"]
-  },
-  "exclude": ["cdk.out"]
+    "typeRoots": ["../node_modules/@types"]
+  }
 }
