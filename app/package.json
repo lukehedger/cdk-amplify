@@ -8,7 +8,6 @@
     "test": "cypress run"
   },
   "dependencies": {
-    "@aws-amplify/core": "3.4.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },

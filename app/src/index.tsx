@@ -1,4 +1,3 @@
-// import Amplify from "@aws-amplify/core";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
