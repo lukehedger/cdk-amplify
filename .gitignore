@@ -10,6 +10,7 @@ node_modules
 # Generated files
 .cdk.staging
 app/cypress/report
+app/cypress/screenshots/*.png
 app/cypress/videos/*.mp4
 app/public/bundle.js
 cdk.out

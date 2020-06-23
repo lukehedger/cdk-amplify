@@ -5,6 +5,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack-dev-server",
+    "start": "npm run dev & wait-on http://127.0.0.1:8080",
     "test": "cypress run --reporter mochawesome --reporter-options 'reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss'",
     "test:report:merge": "mochawesome-merge cypress/report/**/*.json -o cypress/report/mochawesome.json"
   },
@@ -22,6 +23,7 @@
     "mochawesome-merge": "4.1.0",
     "ts-loader": "7.0.5",
     "typescript": "3.9.5",
+    "wait-on": "5.0.1",
     "webpack": "4.43.0",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.0"

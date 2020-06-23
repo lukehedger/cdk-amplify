@@ -43,6 +43,7 @@ test:
     preTest:
       commands:
         - npm install --prefix app
+        - npm start
     test:
       commands:
         - npm test --prefix app

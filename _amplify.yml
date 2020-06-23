@@ -45,6 +45,7 @@ applications:
         preTest:
           commands:
             - npm install --no-audit --no-package-lock --no-progress --silent
+            - npm start
         test:
           commands:
             - npm test
