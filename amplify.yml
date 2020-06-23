@@ -44,4 +44,4 @@ applications:
             - npm install --no-audit --no-package-lock --no-progress --silent
         test:
           commands:
-            - npm test
+            - npx cypress run
