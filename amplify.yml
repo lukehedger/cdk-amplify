@@ -29,7 +29,7 @@ applications:
             - npm install --no-audit --no-package-lock --no-progress --prefix app --production --silent
         build:
           commands:
-            - yarn workspace app build
+            - npm run build --prefix app
     test:
       phases:
         preTest:

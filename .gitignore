@@ -9,6 +9,7 @@ node_modules
 
 # Generated files
 .cdk.staging
+app/public/bundle.js
 cdk.out
 **/bin/**/*.d.ts
 **/bin/**/*.js
