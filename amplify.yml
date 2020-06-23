@@ -1,47 +1,45 @@
 version: 1
-applications:
-  - appRoot: app
-    frontend:
-      artifacts:
-        baseDirectory: public
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
-      customHeaders:
-        - headers:
-            - key: Content-Security-Policy
-              value: default-src self
-            - key: Strict-Transport-Security
-              value: max-age=31536000; includeSubDomains
-            - key: X-Content-Type-Options
-              value: nosniff
-            - key: X-Frame-Options
-              value: SAMEORIGIN
-            - key: X-XSS-Protection
-              value: 1; mode=block
-          pattern: '**/*'
-      phases:
-        preBuild:
-          commands:
-            - npm install --no-audit --no-package-lock --no-progress --silent
-        build:
-          commands:
-            - npm run build
+frontend:
+  artifacts:
+    baseDirectory: app/public
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+  customHeaders:
+    - headers:
+      - key: Content-Security-Policy
+        value: default-src self
+      - key: Strict-Transport-Security
+        value: max-age=31536000; includeSubDomains
+      - key: X-Content-Type-Options
+        value: nosniff
+      - key: X-Frame-Options
+        value: SAMEORIGIN
+      - key: X-XSS-Protection
+        value: 1; mode=block
+    pattern: '**/*'
+  phases:
+    preBuild:
+      commands:
+        - npm install --prefix app
+    build:
+      commands:
+        - npm run build --prefix app
+test:
+  artifacts:
+    baseDirectory: app/cypress
+    files:
+      - '**/*.mp4'
+      - '**/*.png'
+  cache:
+    paths:
+      - node_modules/**/*
+  phases:
+    preTest:
+      commands:
+        - npm install --prefix app
     test:
-      artifacts:
-        baseDirectory: cypress
-        files:
-          - '**/*.mp4'
-          - '**/*.png'
-      cache:
-        paths:
-          - node_modules/**/*
-      phases:
-        preTest:
-          commands:
-            - npm install
-        test:
-          commands:
-            - npx cypress run
+      commands:
+        - npm test --prefix app
