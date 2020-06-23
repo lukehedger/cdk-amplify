@@ -5,7 +5,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack-dev-server",
-    "test": "cypress run"
+    "test": "cypress run --reporter mochawesome --reporter-options 'reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss'",
+    "test:report:merge": "mochawesome-merge cypress/report/**/*.json -o cypress/report/mochawesome.json"
   },
   "dependencies": {
     "react": "16.13.1",
@@ -16,6 +17,8 @@
     "@types/react": "16.9.35",
     "@types/react-dom": "16.9.8",
     "cypress": "4.8.0",
+    "mochawesome": "6.1.1",
+    "mochawesome-merge": "4.1.0",
     "ts-loader": "7.0.5",
     "typescript": "3.9.5",
     "webpack": "4.43.0",

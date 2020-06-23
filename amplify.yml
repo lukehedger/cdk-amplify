@@ -10,9 +10,11 @@ frontend:
   customHeaders:
     - headers:
       - key: Content-Security-Policy
-        value: default-src self
+        value: "default-src https: 'unsafe-inline'"
+      - key: Referrer-Policy
+        value: strict-origin-when-cross-origin
       - key: Strict-Transport-Security
-        value: max-age=31536000; includeSubDomains
+        value: max-age=63072000; includeSubDomains; preload
       - key: X-Content-Type-Options
         value: nosniff
       - key: X-Frame-Options
@@ -30,6 +32,7 @@ frontend:
 test:
   artifacts:
     baseDirectory: app/cypress
+    configFilePath: 'app/cypress/**/mochawesome.json'
     files:
       - '**/*.mp4'
       - '**/*.png'
@@ -43,3 +46,6 @@ test:
     test:
       commands:
         - npm test --prefix app
+    postTest:
+      commands:
+        - npm run test:report:merge
