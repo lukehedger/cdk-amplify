@@ -22,24 +22,56 @@ export class InfraStack extends Stack {
         pullRequestPreview: true,
       },
       buildSpec: BuildSpec.fromObject({
-        version: "1.0",
-        frontend: {
-          artifacts: {
-            baseDirectory: "app/public",
-            files: "**/*",
+        version: 1,
+        applications: [
+          {
+            appRoot: "app",
+            frontend: {
+              artifacts: {
+                baseDirectory: "public",
+                files: ["**/*"],
+              },
+              cache: {
+                paths: ["node_modules/**/*"],
+              },
+              customHeaders: [
+                {
+                  headers: [
+                    {
+                      key: "Content-Security-Policy",
+                      value: "default-src self",
+                    },
+                    {
+                      key: "Strict-Transport-Security",
+                      value: "max-age=31536000; includeSubDomains",
+                    },
+                    {
+                      key: "X-Content-Type-Options",
+                      value: "nosniff",
+                    },
+                    {
+                      key: "X-Frame-Options",
+                      value: "SAMEORIGIN",
+                    },
+                    { key: "X-XSS-Protection", value: "1; mode=block" },
+                  ],
+                  pattern: "**/*",
+                },
+              ],
+              phases: {
+                preBuild: {
+                  commands: ["yarn install --ignore-engines"],
+                },
+                build: {
+                  commands: ["yarn build"],
+                },
+                test: {
+                  commands: ["yarn test"],
+                },
+              },
+            },
           },
-          phases: {
-            preBuild: {
-              commands: ["yarn workspace app install --ignore-engines"],
-            },
-            build: {
-              commands: ["yarn workspace app build"],
-            },
-            test: {
-              commands: ["yarn workspace app test"],
-            },
-          },
-        },
+        ],
       }),
       environmentVariables: {
         API_ENV: "production",
