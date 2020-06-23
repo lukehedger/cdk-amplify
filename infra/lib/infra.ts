@@ -3,7 +3,6 @@ import {
   CustomRule,
   GitHubSourceCodeProvider,
 } from "@aws-cdk/aws-amplify";
-import { BuildSpec } from "@aws-cdk/aws-codebuild";
 import { Construct, SecretValue, Stack, StackProps } from "@aws-cdk/core";
 
 export class InfraStack extends Stack {
@@ -21,26 +20,6 @@ export class InfraStack extends Stack {
         },
         pullRequestPreview: true,
       },
-      buildSpec: BuildSpec.fromObject({
-        version: "1.0",
-        frontend: {
-          artifacts: {
-            baseDirectory: "app/public",
-            files: "**/*",
-          },
-          phases: {
-            preBuild: {
-              commands: ["yarn workspace app install --ignore-engines"],
-            },
-            build: {
-              commands: ["yarn workspace app build"],
-            },
-            test: {
-              commands: ["yarn workspace app test"],
-            },
-          },
-        },
-      }),
       environmentVariables: {
         API_ENV: "production",
       },
