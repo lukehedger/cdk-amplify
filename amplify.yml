@@ -30,6 +30,14 @@ applications:
           commands:
             - npm run build
     test:
+      artifacts:
+        baseDirectory: cypress
+        files:
+          - '**/*.mp4'
+          - '**/*.png'
+      cache:
+        paths:
+          - node_modules/**/*
       phases:
         preTest:
           commands:
@@ -37,8 +45,3 @@ applications:
         test:
           commands:
             - npm test
-      artifacts:
-        baseDirectory: cypress
-        files:
-          - '**/*.png'
-          - '**/*.mp4'
