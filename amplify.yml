@@ -48,4 +48,4 @@ test:
         - npm test --prefix app
     postTest:
       commands:
-        - npm run test:report:merge
+        - npm run test:report:merge --prefix app
