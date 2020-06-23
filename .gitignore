@@ -9,6 +9,7 @@ node_modules
 
 # Generated files
 .cdk.staging
+app/cypress/videos/*.mp4
 app/public/bundle.js
 cdk.out
 **/bin/**/*.d.ts
