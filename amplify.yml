@@ -25,7 +25,8 @@ applications:
       phases:
         preBuild:
           commands:
-            - yarn workspace app install --ignore-engines
+            - pwd
+            - npm install --no-audit --no-package-lock --no-progress --prefix app --production --silent
         build:
           commands:
             - yarn workspace app build
