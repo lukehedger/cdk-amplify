@@ -34,7 +34,7 @@ applications:
     test:
       artifacts:
         baseDirectory: cypress
-        configFilePath: 'cypress/**/mochawesome.json'
+        configFilePath: report/mochawesome.json
         files:
           - '**/*.mp4'
           - '**/*.png'
