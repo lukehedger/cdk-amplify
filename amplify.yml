@@ -25,19 +25,18 @@ applications:
       phases:
         preBuild:
           commands:
-            - pwd
-            - npm install --no-audit --no-package-lock --no-progress --prefix app --production --silent
+            - npm install --no-audit --no-package-lock --no-progress --production --silent
         build:
           commands:
-            - npm run build --prefix app
+            - npm run build
     test:
       phases:
         preTest:
           commands:
-            - yarn workspace app install --ignore-engines
+            - npm install --no-audit --no-package-lock --no-progress --production --silent
         test:
           commands:
-            - yarn workspace app test
+            - npm test
       artifacts:
         baseDirectory: cypress
         files:
