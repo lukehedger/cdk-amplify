@@ -41,7 +41,7 @@ applications:
       phases:
         preTest:
           commands:
-            - npm install --no-audit --no-package-lock --no-progress --silent
+            - npm install
         test:
           commands:
             - npx cypress run
