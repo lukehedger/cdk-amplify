@@ -25,10 +25,20 @@ applications:
       phases:
         preBuild:
           commands:
-            - yarn install --ignore-engines
+            - yarn workspace app install --ignore-engines
         build:
           commands:
-            - yarn build
+            - yarn workspace app build
+    test:
+      phases:
+        preTest:
+          commands:
+            - yarn workspace app install --ignore-engines
         test:
           commands:
-            - yarn test
+            - yarn workspace app test
+      artifacts:
+        baseDirectory: cypress
+        files:
+          - '**/*.png'
+          - '**/*.mp4'
