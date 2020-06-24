@@ -9,3 +9,9 @@ Amplify App deployed using the CDK.
 ```sh
 yarn
 ```
+
+### Run local development server
+
+```sh
+yarn workspace app dev
+```
