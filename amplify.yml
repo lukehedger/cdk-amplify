@@ -1,52 +1,54 @@
 version: 1
-frontend:
-  artifacts:
-    baseDirectory: app/public
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
-  customHeaders:
-    - headers:
-      - key: Content-Security-Policy
-        value: "default-src https: 'unsafe-inline'"
-      - key: Referrer-Policy
-        value: strict-origin-when-cross-origin
-      - key: Strict-Transport-Security
-        value: max-age=63072000; includeSubDomains; preload
-      - key: X-Content-Type-Options
-        value: nosniff
-      - key: X-Frame-Options
-        value: SAMEORIGIN
-      - key: X-XSS-Protection
-        value: 1; mode=block
-      pattern: '**/*'
-  phases:
-    preBuild:
-      commands:
-        - npm install --prefix app
-    build:
-      commands:
-        - npm run build --prefix app
-test:
-  artifacts:
-    baseDirectory: app/cypress
-    configFilePath: report/mochawesome.json
-    files:
-      - '**/*.mp4'
-      - '**/*.png'
-  cache:
-    paths:
-      - node_modules/**/*
-  phases:
-    preTest:
-      commands:
-        - npm install --prefix app
-        - npm start --prefix app
+applications:
+  - appRoot: app
+    frontend:
+      artifacts:
+        baseDirectory: public
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+      customHeaders:
+        - headers:
+          - key: Content-Security-Policy
+            value: "default-src https: 'unsafe-inline'"
+          - key: Referrer-Policy
+            value: strict-origin-when-cross-origin
+          - key: Strict-Transport-Security
+            value: max-age=63072000; includeSubDomains; preload
+          - key: X-Content-Type-Options
+            value: nosniff
+          - key: X-Frame-Options
+            value: SAMEORIGIN
+          - key: X-XSS-Protection
+            value: 1; mode=block
+          pattern: '**/*'
+      phases:
+        preBuild:
+          commands:
+            - npm install --no-audit --no-package-lock --no-progress --silent
+        build:
+          commands:
+            - npm run build
     test:
-      commands:
-        - npm test --prefix app
-    postTest:
-      commands:
-        - npm run test:report:merge --prefix app
+      artifacts:
+        baseDirectory: cypress
+        configFilePath: report/mochawesome.json
+        files:
+          - '**/*.mp4'
+          - '**/*.png'
+      cache:
+        paths:
+          - node_modules/**/*
+      phases:
+        preTest:
+          commands:
+            - npm install --no-audit --no-package-lock --no-progress --silent
+            - npm start
+        test:
+          commands:
+            - npm test
+        postTest:
+          commands:
+            - npm run test:report:merge
