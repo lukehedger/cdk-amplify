@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "servor public index.html 8080",
-    "start": "npm run dev & wait-on http://127.0.0.1:8080",
+    "dev": "serve public --listen 1234",
+    "start": "npm run dev & wait-on http://127.0.0.1:1234",
     "test": "cypress run --reporter mochawesome --reporter-options 'reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss'",
     "test:report:merge": "mochawesome-merge cypress/report/**/*.json -o cypress/report/mochawesome.json"
   },
